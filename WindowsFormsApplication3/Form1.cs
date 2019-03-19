@@ -30,16 +30,26 @@ namespace WindowsFormsApplication3
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+
             MathServiceClient loClient = new MathServiceClient();
 
-            Int32 lonum1 = Convert.ToInt32(textboxnum1.Text.Trim());
-            Int32 lonum2 = Convert.ToInt32(textboxnum2.Text.Trim());
 
-          if(comboBox1.Text=="Add")
+            int lonum1 = Convert.ToInt32(textboxnum1.Text.Trim());
+            int lonum2 = Convert.ToInt32(textboxnum2.Text.Trim());
+            /*           
+            #pragma warning disable CS0168 // Variable is declared but never used
+                        catch (Exception exception)
+            #pragma warning restore CS0168 // Variable is declared but never used
+                        {
+               */
+
+
+            if (comboBox1.Text == "Add")
             {
                 txtresult.Text = loClient.Add(lonum1, lonum2).ToString();
             }
-          else if(comboBox1.Text == "Subtract")
+            else if (comboBox1.Text == "Subtract")
             {
                 txtresult.Text = loClient.Subtract(lonum1, lonum2).ToString();
             }
@@ -47,10 +57,17 @@ namespace WindowsFormsApplication3
             {
                 txtresult.Text = loClient.Multiply(lonum1, lonum2).ToString();
             }
-            else 
+            else
             {
-                txtresult.Text = loClient.Divide(lonum1, lonum2).ToString();
+                if (lonum2 == 0)
+                {
+                    txtresult.Text = "Error";
+                }
+                else
+                    txtresult.Text = loClient.Divide(lonum1, lonum2).ToString();
             }
+
+
         }
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
